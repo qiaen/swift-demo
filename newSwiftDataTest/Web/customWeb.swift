@@ -99,6 +99,7 @@ struct CustomWebView: View {
             }
             
             WebView(url: URL(string: url)!, isLoading: $isLoading, loadError: $loadError, pageTitle: $pageTitle)
+                .ignoresSafeArea()
                
 //            Button("点击调用JS方法", action: {
 ////                WebView.evaluateJavaScript("gotoshopDetail()")

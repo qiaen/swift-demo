@@ -13,35 +13,28 @@ struct ContentView: View {
     @State var sctop: CGFloat = 0.0
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    GeometryReader { proxy in
-                        Color.clear.preference(key: ScrollOffsetPreferenceKey.self, value: proxy.frame(in: .named("MyScrollView")).minY)
-                    }
-                    .frame(height: 0) // 隐藏的 GeometryReader
-                    Text("距离顶部: \(sctop)")
-                        .padding(.top, 120)
-                        .foregroundStyle(.pink)
-                        .navigationTitle("明明变了为什么检测不到")
-                    
-                    ForEach(0 ..< 30) { index in
-                        HStack {
-                            Button(action: {
-                                // 按钮操作
-                            }) {
-                                Text("item --- \(index)")
-                            }
-                            .frame(width: 100, height: 40)
-                        }
-                    }
+            List {
+                NavigationLink {
+                    CustomWebView(url: "http://localhost:1025/html/webview/full.html")
+                        .ignoresSafeArea(.container)
+                } label: {
+                    Text("打开全屏")
                 }
+                NavigationLink {
+                    CustomWebView(url: "https://threejs.org/examples/#webgl_animation_keyframes")
+                        .ignoresSafeArea()
+                    
+                } label: {
+                    Text("打开3D")
+                }
+                NavigationLink {
+                    localWeb()
+                } label: {
+                    Text("打开本地html")
+                }
+                
             }
-            .background(Color.clear)
-            .coordinateSpace(name: "MyScrollView")
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                print("Scroll offset ----- \(value)")
-                sctop = value
-            }
+            .navigationBarTitle("Home")
         }
     }
 }

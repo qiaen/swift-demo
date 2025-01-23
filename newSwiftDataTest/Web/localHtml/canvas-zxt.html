@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+            body {
+                padding: 0 20px;
+            }
+			.div-c {
+				padding-top: 16px;
+				width: 100%;
+				height: 176px;
+				background-color: #fff;
+				border-radius: 6px;
+				margin: 20px;
+			}
+            .hello {
+                font-size: 20px;
+                
+            }
+		</style>
+	</head>
+	<body>
+        <div class="hello">Hello, canvas</div>
+		<div class="div-c">
+			<canvas id="c1" style="width: 100%" height="176"></canvas>
+		</div>
+	</body>
+	<script>
+		let c1 = document.querySelector('#c1')
+		let ctx = c1.getContext('2d')
+		c1.onclick = function(e) {
+			console.log(e)
+		}
+		/** 画轴 */
+		function drawAxis(context) {
+			/*1.绘制网格*/
+			/*2.网格的大小*/
+			var lineNumber = 6
+			var canvasHeight = context.canvas.height - lineNumber
+			var canvasWidth = context.canvas.width - 30
+			console.log(canvasWidth, canvasHeight)
+			for (var i = 0; i < 6; i++) {
+				let endPoint = i * 28 + 10.5
+				context.beginPath()
+				context.moveTo(30, endPoint)
+				context.lineTo(canvasWidth, endPoint)
+				context.strokeStyle = '#ddd'
+				context.lineWidth = 1
+				context.stroke()
+			}
+		}
+		drawAxis(ctx)
+		/** 写上数字 */
+		function drawText(context) {
+			let yT = ['200', '160', '120', '80', '40', '0']
+			let left = {
+				1: 16,
+				2: 8,
+				3: 0
+			}
+			yT.forEach((item, index) => {
+				context.fillStyle = '#555'
+				context.font = '14px Arial'
+				context.fillText(item, left[item.length], 15 + index * 28)
+			})
+			let xTDay = ['0', '2', '4', '6', '8', '10', '12', '14(h)']
+			let xTWeek = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			let xTMonth = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '12(月)']
+			let xTYear = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2026(年)']
+			xTDay.forEach((item, index) => {
+				context.fillStyle = '#555'
+				context.font = '14px Arial'
+				let x = 30 * index + 32
+				context.fillText(item, x, 170)
+			})
+		}
+		drawText(ctx)
+		/** 画线 */
+		let data = [120, 10, 28, 100, 89, 38, 29, 46, 52]
+		function drawLine(context, shadow) {
+			/** 开始x坐标、开始y坐标、结束x坐标、结束y坐标 */
+			let grd = context.createLinearGradient(0, 100, 320, 100)
+			grd.addColorStop(0, `rgba(14, 185, 176, ${shadow ? 0.1 : 1})`)
+			grd.addColorStop(1, `rgba(160, 209, 118, ${shadow ? 0.1 : 1})`)
+			// 将渐变赋值给线的样式
+			ctx.strokeStyle = grd
+			// context.shadowBlur = 5
+			// context.shadowColor = 'rgba(14, 185, 176, 0.5)'
+			// context.shadowColor = grd
+			// context.shadowOffsetX = 0
+			// context.shadowOffsetY  = 6
+
+			if (shadow) {
+				// context.globalAlpha = 1
+				// context.shadowBlur = 10
+			}
+			// 高大约170+
+			let pyX = shadow ? 6 : 0
+			context.beginPath()
+			let newData = data.map(item => {
+				return 150 - (item / 200) * 140
+			})
+			context.moveTo(36, newData[0] + pyX)
+			newData.forEach((item, index) => {
+				let x = index * 28 + 36
+				context.lineTo(x, item + pyX)
+			})
+			context.lineWidth = shadow ? 5 : 2
+			context.stroke()
+		}
+		drawLine(ctx)
+		drawLine(ctx, true)
+		function drawReact(context) {
+			// context.save()
+			context.fillRect(200, 50, 30, 20)
+			context.fillStyle = '#fff'
+			context.fill()
+			// context.restore()
+		}
+		// drawReact(ctx)
+	</script>
+</html>
