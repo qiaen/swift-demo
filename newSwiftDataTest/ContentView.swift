@@ -33,6 +33,12 @@ struct ContentView: View {
                     Text("打开本地html")
                 }
                 
+                NavigationLink {
+                    Animation4()
+                } label: {
+                    Text("歌词显示")
+                }
+                
             }
             .navigationBarTitle("Home")
         }
