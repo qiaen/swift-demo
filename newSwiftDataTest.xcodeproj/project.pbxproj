@@ -195,6 +195,9 @@
 			);
 			mainGroup = C36283712D0AD76D002F1086;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C3FB33432D55B7F600AE40F8 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C362837B2D0AD76D002F1086 /* Products */;
 			projectDirPath = "";
@@ -533,6 +536,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3FB33432D55B7F600AE40F8 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/colinc86/LaTeXSwiftUI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = C36283722D0AD76D002F1086 /* Project object */;
 }
