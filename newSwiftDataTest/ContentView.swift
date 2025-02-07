@@ -38,6 +38,11 @@ struct ContentView: View {
                 } label: {
                     Text("歌词显示")
                 }
+                NavigationLink {
+                    Animation5()
+                } label: {
+                    Text("歌词显示-位移动画版")
+                }
                 
             }
             .navigationBarTitle("Home")
